@@ -1,12 +1,12 @@
-package com.balstar.example.ms.userservice.application;
+package com.balstar.example.ms.user.api.application;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Main application class for the User Service.
+ * Main application class for the User API.
  */
-@EnableAutoConfiguration
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) throws Exception {
