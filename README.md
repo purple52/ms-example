@@ -19,8 +19,10 @@ Build using Maven, eg:
 
 Run using the Java command, eg:
 
-    java -jar user-api/target/user-api-1.0-SNAPSHOT.jar --server.port=8080 
-    java -jar connection-api/target/connection-api-1.0-SNAPSHOT.jar --server.port=8081 --userApiBaseUrl=http://localhost:8080
+    java -jar user-api/target/user-api-1.1-SNAPSHOT.jar --server.port=8080 
+    java -jar connection-api/target/connection-api-1.1-SNAPSHOT.jar --server.port=8081 --userApiBaseUrl=http://localhost:8080
+
+Or download the latest .jar files from the [Releases](https://github.com/purple52/ms-example/releases) page and run as above with the downloaded filename.
 
 ## Testing
 
