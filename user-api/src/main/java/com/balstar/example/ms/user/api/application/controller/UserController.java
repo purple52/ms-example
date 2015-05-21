@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/user/{id}")
+    @RequestMapping("/users/{id}")
     public ApiUser getUser(@PathVariable Long id) throws UserNotFoundException {
         try {
             return conversionService.convert(userService.getById(id), ApiUser.class);
@@ -30,7 +30,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/user")
+    @RequestMapping(method = RequestMethod.POST, value = "/users")
     public ApiUser createUser(@RequestBody CreateUserRequest createUserRequest) {
         return conversionService.convert(userService.create(createUserRequest.getName()), ApiUser.class);
     }

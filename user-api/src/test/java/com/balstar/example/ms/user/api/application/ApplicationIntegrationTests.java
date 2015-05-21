@@ -18,7 +18,7 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Integration test for the whole User API application.
+ * Integration tests for the whole User API application.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -29,7 +29,7 @@ public class ApplicationIntegrationTests {
 
     @Test
     public void emptyAPIReturns404() {
-        ResponseEntity<ApiUser> response = restTemplate.getForEntity("http://localhost:8080/user/1", ApiUser.class, Collections.emptyMap());
+        ResponseEntity<ApiUser> response = restTemplate.getForEntity("http://localhost:8080/users/1", ApiUser.class, Collections.emptyMap());
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -39,7 +39,7 @@ public class ApplicationIntegrationTests {
         CreateUserRequest createUserRequest = new CreateUserRequest();
         createUserRequest.setName("test user name");
 
-        ResponseEntity<ApiUser> response = restTemplate.postForEntity("http://localhost:8080/user", createUserRequest, ApiUser.class, Collections.emptyMap());
+        ResponseEntity<ApiUser> response = restTemplate.postForEntity("http://localhost:8080/users", createUserRequest, ApiUser.class, Collections.emptyMap());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(1L, response.getBody().getId().longValue());

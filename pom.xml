@@ -12,6 +12,9 @@
         <module>user-api</module>
         <module>user-storage</module>
         <module>user-api-model</module>
+        <module>connection-storage</module>
+        <module>connection-api</module>
+        <module>connection-api-model</module>
     </modules>
 
     <parent>
@@ -44,6 +47,11 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>1.10.19</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jgrapht</groupId>
+                <artifactId>jgrapht-core</artifactId>
+                <version>0.9.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
