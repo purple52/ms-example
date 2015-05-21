@@ -5,7 +5,7 @@
     <groupId>com.balstar.ms-example</groupId>
     <artifactId>ms-example</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <modules>
         <module>user-api</module>
         <module>user-storage</module>
