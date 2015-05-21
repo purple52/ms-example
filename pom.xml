@@ -18,6 +18,12 @@
         <module>user-api-client</module>
     </modules>
 
+    <scm>
+        <url>https://github.com/purple52/ms-example</url>
+        <connection>scm:git:git://github.com/purple52/ms-example.git</connection>
+        <developerConnection>scm:git:git@github.com:purple52/ms-example.git</developerConnection>
+    </scm>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
