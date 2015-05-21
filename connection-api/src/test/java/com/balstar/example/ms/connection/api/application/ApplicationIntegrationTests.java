@@ -1,8 +1,13 @@
 package com.balstar.example.ms.connection.api.application;
 
+import com.balstar.example.ms.connection.api.application.config.MockRemoteUserApiConfiguration;
 import com.balstar.example.ms.connection.api.request.CreateConnectionRequest;
+import com.balstar.example.ms.user.api.client.RemoteUserApi;
+import com.balstar.example.ms.user.api.model.ApiUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -16,16 +21,30 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.when;
 
 /**
  * Integration tests for the whole Connection API application.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = {
+        Application.class,
+        MockRemoteUserApiConfiguration.class
+})
 @WebIntegrationTest
 public class ApplicationIntegrationTests {
 
+    @Autowired
+    private RemoteUserApi remoteUserApi;
+
     private RestTemplate restTemplate = new TestRestTemplate();
+
+    @Before
+    public void setUp() throws Exception {
+        // Pretend all users exist
+        when(remoteUserApi.getByUserId(anyLong())).thenReturn(new ApiUser());
+    }
 
     @Test
     public void userWithNoConnectionsReturnsEmptyList() {

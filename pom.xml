@@ -15,6 +15,7 @@
         <module>connection-storage</module>
         <module>connection-api</module>
         <module>connection-api-model</module>
+        <module>user-api-client</module>
     </modules>
 
     <parent>

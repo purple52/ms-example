@@ -1,14 +1,21 @@
 package com.balstar.example.ms.connection.storage;
 
+import com.balstar.example.ms.user.api.client.RemoteUserApi;
+import com.balstar.example.ms.user.api.client.RemoteUserApiException;
+import com.balstar.example.ms.user.api.model.ApiUser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for the ConnectionService class.
@@ -16,8 +23,17 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class ConnectionServiceTest {
 
+    @Mock
+    private RemoteUserApi remoteUserApi;
+
     @InjectMocks
     private ConnectionService connectionService;
+
+    @Before
+    public void setUp() throws Exception {
+        // Default to assuming all users exist
+        when(remoteUserApi.getByUserId(anyLong())).thenReturn(new ApiUser());
+    }
 
     @Test
     public void emptySetReturnedWhenNoConnections() {
@@ -70,5 +86,12 @@ public class ConnectionServiceTest {
         assertTrue(userIds.contains(2L));
         assertTrue(userIds.contains(3L));
         assertTrue(userIds.contains(5L));
+    }
+
+    @Test(expected = ConnectionCreationException.class)
+    public void unknownUserThrowsException() throws Exception {
+        when(remoteUserApi.getByUserId(99L)).thenThrow(new RemoteUserApiException("User does not exist", new RuntimeException()));
+
+        connectionService.addConnection(1L, 99L);
     }
 }

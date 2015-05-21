@@ -31,6 +31,11 @@
             <artifactId>connection-api-model</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.balstar.ms-example</groupId>
+            <artifactId>user-api-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

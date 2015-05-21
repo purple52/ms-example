@@ -1,5 +1,7 @@
 package com.balstar.example.ms.connection.storage;
 
+import com.balstar.example.ms.user.api.client.RemoteUserApi;
+import com.balstar.example.ms.user.api.client.RemoteUserApiException;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -16,7 +18,13 @@ import java.util.Set;
  */
 public class ConnectionService {
 
+    private RemoteUserApi remoteUserApi;
+
     private final UndirectedGraph<Long, DefaultEdge> connections = new SimpleGraph<>(DefaultEdge.class);
+
+    public ConnectionService(RemoteUserApi remoteUserApi) {
+        this.remoteUserApi = remoteUserApi;
+    }
 
     /**
      * Get the set of users that the given user is directly connected to.
@@ -52,6 +60,14 @@ public class ConnectionService {
      * @param userIdB the id of the user at the other end of the connection
      */
     public void addConnection(Long userIdA, Long userIdB) {
+
+        try {
+            remoteUserApi.getByUserId(userIdA);
+            remoteUserApi.getByUserId(userIdB);
+        } catch (RemoteUserApiException ex) {
+            throw new ConnectionCreationException("Could not verify that users both exist", ex);
+        }
+
         synchronized (connections) {
             connections.addVertex(userIdA);
             connections.addVertex(userIdB);
